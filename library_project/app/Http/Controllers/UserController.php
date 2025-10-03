@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,7 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return User::all();
     }
 
     /**
@@ -19,7 +20,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user=new User();
+        $user->fill($request->all());
+        $user->self();
+        return response()->json($user,201);
     }
 
     /**
@@ -27,7 +31,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return User::find($id);
     }
 
     /**
